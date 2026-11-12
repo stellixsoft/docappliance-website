@@ -1,0 +1,88 @@
+/* Styles for behaviour the original platform added with JavaScript. */
+
+/* Icons: sized like Font Awesome glyphs (1em tall, inline). */
+.svg-icon {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+  font-style: normal;
+}
+.svg-icon__glyph {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+/* Contact / newsletter form result messages */
+.magento-form form[data-status="success"] [data-response-type="success"],
+.magento-form form[data-status="failure"] [data-response-type="failure"] {
+  display: block;
+}
+.magento-form form[data-status="sending"] button[type="submit"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Mobile-only carousel on the Services page */
+.mobile-carousel {
+  max-width: 100%;
+}
+.mobile-carousel__wrapper {
+  display: flex;
+  position: relative;
+  align-items: stretch;
+}
+.mobile-carousel__viewport {
+  flex: 1 0 0%;
+  overflow: hidden;
+}
+.mobile-carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  transition: transform 0.5s;
+}
+.mobile-carousel__slide {
+  min-width: 0;
+}
+.mobile-carousel__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 2.25rem;
+  min-width: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--avb-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.mobile-carousel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 1.75rem;
+}
+
+/* Accessibility helper copied from the platform (screen-reader-only phone notice). */
+.a11y-notice {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+/* MUI body1 text the platform renders inside a few CMS pages (e.g. the empty brand list). */
+@layer app-mui {
+  .typography-body1 { margin: 0; font-family: var(--avb-global-font-family, "Roboto", "Helvetica", "Arial", sans-serif); font-weight: 400; font-size: 1rem; line-height: 1.5; }
+}

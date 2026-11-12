@@ -1,0 +1,53 @@
+.cms {
+  position: relative;
+  z-index: 1;
+}
+.legal {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.5rem 16px;
+}
+.legalList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+.legalItem {
+  flex: 0 0 100%;
+  margin: 0 1rem 0.75rem;
+  text-align: center;
+}
+.legalLink,
+.disclaimer {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.legalLink {
+  color: #1c54a4;
+  text-decoration: none;
+}
+.legalLink:hover {
+  text-decoration: underline;
+}
+.disclaimer {
+  color: #757575;
+  text-align: center;
+}
+@media (min-width: 600px) {
+  .legal {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .legalItem {
+    flex: 0 0 auto;
+    margin: 0 0.5rem;
+  }
+}

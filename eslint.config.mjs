@@ -12,12 +12,19 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    // Ported CMS content uses plain <img> on purpose so sizes match the live site pixel for pixel.
+    files: ["src/content/**/*.tsx"],
+    rules: { "@next/next/no-img-element": "off" },
+  },
+  {
     ignores: [
       "node_modules/**",
       ".next/**",
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // one-off Node tools used to port the live site (CommonJS)
+      "scripts/port/**",
     ],
   },
 ];

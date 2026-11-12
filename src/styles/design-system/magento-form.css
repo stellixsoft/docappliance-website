@@ -1,0 +1,3 @@
+.magento-form{position:relative;}
+.magento-form [data-response-type="success"]{display:none;}
+.magento-form [data-response-type="failure"]{display:none;}

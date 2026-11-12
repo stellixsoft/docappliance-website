@@ -1,0 +1,198 @@
+[
+  {
+    "slug": "about-us",
+    "route": "/about-us",
+    "component": "AboutUsContent",
+    "title": "Locally Owned Appliance Store | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We offer a large selection of appliances with a highly experienced sales staff. Stop by today! "
+  },
+  {
+    "slug": "bodewell-membership-terms",
+    "route": "/bodewell-membership-terms",
+    "component": "BodewellMembershipTermsContent",
+    "title": "Bodewell Membership Terms | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "brands",
+    "route": "/brands",
+    "component": "BrandsContent",
+    "title": "Shop by Brands | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We carry a wide variety of appliance brands at discount prices. Shop our huge selection of brands today! "
+  },
+  {
+    "slug": "careers",
+    "route": "/careers",
+    "component": "CareersContent",
+    "title": "Careers | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "contacts",
+    "route": "/contacts",
+    "component": "ContactsContent",
+    "title": "Kitchen & Home Appliances Service | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliance repairs and service in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS "
+  },
+  {
+    "slug": "estill-springs-tn",
+    "route": "/estill-springs-tn",
+    "component": "EstillSpringsTnContent",
+    "title": "Estill Springs, TN | Kitchen & Home Appliances Service | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliance repairs and service in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS "
+  },
+  {
+    "slug": "faq",
+    "route": "/faq",
+    "component": "FaqContent",
+    "title": "Doctor Appliance Support & FAQs | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Have questions? Find quick answers to commonly asked questions about our services. "
+  },
+  {
+    "slug": "home-store-partnership-program-hsp",
+    "route": "/home-store-partnership-program-hsp",
+    "component": "HomeStorePartnershipProgramHspContent",
+    "title": "Home Store Partnership Program (HSP) | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "home",
+    "route": "/",
+    "component": "HomeContent",
+    "title": "Kitchen & Home Appliances Service and Repairs | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Doctor Appliance is a locally owned appliance repair business located in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; and Salina KS. We offer the best service, delivery, installation and big savings every day.  "
+  },
+  {
+    "slug": "household-care-plan",
+    "route": "/household-care-plan",
+    "component": "HouseholdCarePlanContent",
+    "title": "Household Care Plan | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "knoxville-tn",
+    "route": "/knoxville-tn",
+    "component": "KnoxvilleTnContent",
+    "title": "Knoxville, TN | Kitchen & Home Appliances Service | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliance repairs and service in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS "
+  },
+  {
+    "slug": "parts",
+    "route": "/parts",
+    "component": "PartsContent",
+    "title": "Parts | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "phoenix-az",
+    "route": "/phoenix-az",
+    "component": "PhoenixAzContent",
+    "title": "Phoenix, AZ | Kitchen & Home Appliances Service | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliance repairs and service in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS "
+  },
+  {
+    "slug": "preventative-maintenance-test",
+    "route": "/preventative-maintenance-test",
+    "component": "PreventativeMaintenanceTestContent",
+    "title": "h0136_1 preventative-maintenance-test | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "preventative-maintenance",
+    "route": "/preventative-maintenance",
+    "component": "PreventativeMaintenanceContent",
+    "title": "Preventative Maintenance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "privacy-policies_california-privacy-rights",
+    "route": "/privacy-policies/california-privacy-rights",
+    "component": "PrivacyPoliciesCaliforniaPrivacyRightsContent",
+    "title": "California Privacy Rights | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Residents of California have additional data privacy rights under the California Consumer Privacy Act (CCPA) regarding collection of their personal information. "
+  },
+  {
+    "slug": "privacy-policies_do-not-sell-my-personal-information",
+    "route": "/privacy-policies/do-not-sell-my-personal-information",
+    "component": "PrivacyPoliciesDoNotSellMyPersonalInformationContent",
+    "title": "Do Not Sell My Information | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We do not sell your personally identifiable information to anyone. We use your data to provide and improve your experience while visiting our website. "
+  },
+  {
+    "slug": "privacy-policies_general-privacy-policy",
+    "route": "/privacy-policies/general-privacy-policy",
+    "component": "PrivacyPoliciesGeneralPrivacyPolicyContent",
+    "title": "Website Privacy Policy | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Want to know how we collect and use your data? Learn more about our privacy policies including the types of data we collect and third-party services. Your privacy when you shop online is important. Learn more about our privacy policies concerning your data, payment information, and third-party services. "
+  },
+  {
+    "slug": "privacy-policies_terms-and-conditions",
+    "route": "/privacy-policies/terms-and-conditions",
+    "component": "PrivacyPoliciesTermsAndConditionsContent",
+    "title": "Website Terms and Conditions | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "privacy-policy-cookie-restriction-mode",
+    "route": "/privacy-policy-cookie-restriction-mode",
+    "component": "PrivacyPolicyCookieRestrictionModeContent",
+    "title": "Privacy Policy | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "privacy",
+    "route": "/privacy",
+    "component": "PrivacyContent",
+    "title": "Privacy Policy | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "This Privacy Policy applies to www.brandsource.com/ owned and operated by BrandSource. This Privacy Policy describes how BrandSource collects, uses, shares and secures the personal information you provide "
+  },
+  {
+    "slug": "privacy_california-privacy-rights",
+    "route": "/privacy/california-privacy-rights",
+    "component": "PrivacyCaliforniaPrivacyRightsContent",
+    "title": "California Privacy Rights | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "request-quote",
+    "route": "/request-quote",
+    "component": "RequestQuoteContent",
+    "title": "Request A Quote | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "return-and-store-policies",
+    "route": "/return-and-store-policies",
+    "component": "ReturnAndStorePoliciesContent",
+    "title": "Return & Store Policies | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "reviews357246",
+    "route": "/reviews357246",
+    "component": "Reviews357246Content",
+    "title": "Reviews | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "salina-ks",
+    "route": "/salina-ks",
+    "component": "SalinaKsContent",
+    "title": "Salina, KS | Kitchen & Home Appliances Service | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliance repairs and service in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS "
+  },
+  {
+    "slug": "service-network-partnership",
+    "route": "/service-network-partnership",
+    "component": "ServiceNetworkPartnershipContent",
+    "title": "Service Network Partnership | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "services",
+    "route": "/services",
+    "component": "ServicesContent",
+    "title": "Schedule Appliance Service  | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We have factory-trained technicians for appliance service & appliance repair. Call today for an appointment! "
+  }
+]
