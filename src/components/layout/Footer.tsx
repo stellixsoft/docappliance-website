@@ -1,21 +1,33 @@
 import Link from "next/link";
-import { legalNav } from "@/data/site";
+import { legalNav, type NavItem } from "@/data/site";
 import { FooterBlocks } from "./FooterBlocks";
 import styles from "./Footer.module.css";
 
-export function Footer() {
+type FooterProps = {
+  /** CMS footer blocks (newsletter, link columns, copyright) of the site being rendered. */
+  blocks?: React.ReactNode;
+  legal?: NavItem[];
+};
+
+export function Footer({ blocks = <FooterBlocks />, legal = legalNav }: FooterProps = {}) {
   return (
     <footer>
       <div className={styles.cms}>
-        <FooterBlocks />
+        {blocks}
       </div>
       <div className={styles.legal}>
         <ul className={styles.legalList}>
-          {legalNav.map((item) => (
+          {legal.map((item) => (
             <li key={item.href} className={styles.legalItem}>
-              <Link href={item.href} className={styles.legalLink}>
-                {item.label}
-              </Link>
+              {item.external ? (
+                <a href={item.href} className={styles.legalLink}>
+                  {item.label}
+                </a>
+              ) : (
+                <Link href={item.href} className={styles.legalLink}>
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

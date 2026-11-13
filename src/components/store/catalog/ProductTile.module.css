@@ -1,0 +1,253 @@
+/* Product card. Values measured from the live category grid. */
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+  font: 400 16px/24px Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+.media {
+  position: relative;
+  border: 1px solid #bdbdbd;
+}
+.imageLink {
+  display: grid;
+  padding: 32px;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: 320px;
+  margin-bottom: 7px;
+  object-fit: contain;
+}
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  max-width: calc(100% - 80px);
+  padding: 0 16px;
+  border-radius: 4px;
+  background: #00f;
+  color: #fff;
+  font: 500 10px/17.5px Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+}
+.wish {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 24px;
+  cursor: pointer;
+}
+.wish:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.energyStar {
+  position: absolute;
+  left: 2px;
+  bottom: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 34px;
+}
+.swatch {
+  width: 30px;
+  height: 30px;
+  margin: 0 8px 4px 0;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #fff center / cover no-repeat;
+  box-sizing: border-box;
+}
+.swatch:first-child {
+  border: 2px solid rgb(41, 182, 246);
+  box-shadow: rgba(0, 0, 0, 0.333) 2px 2px 5px 0;
+}
+
+.info {
+  flex: 1 0 auto;
+  display: grid;
+  align-content: start;
+  grid-template-columns: minmax(0, 1fr);
+  font-size: 12px;
+  line-height: 18px;
+}
+.name {
+  margin: 0;
+  font: inherit;
+}
+.name a {
+  color: inherit;
+  text-decoration: none;
+}
+.name a:hover {
+  text-decoration: underline;
+}
+.model {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+}
+.model span:first-child {
+  font-weight: 700;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 6px 1px;
+  box-sizing: border-box;
+}
+.reviewCount {
+  margin-left: 2px;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgb(112, 117, 122);
+}
+.price {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.priceSale {
+  color: rgb(204, 51, 51);
+}
+.saveRow {
+  display: flex;
+  align-items: center;
+  line-height: 18px;
+}
+.was {
+  margin-right: 8px;
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
+}
+.save {
+  margin-right: 8px;
+  font-weight: 700;
+  color: rgb(204, 51, 51);
+}
+.ends {
+  color: rgb(204, 51, 51);
+}
+.promos {
+  display: grid;
+  justify-items: start;
+}
+.promoBadge {
+  display: inline-flex;
+  margin: 4px 4px 4px 0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgb(0, 142, 71);
+  color: #fff;
+  line-height: 17.16px;
+}
+.seeSavings {
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 23px;
+  color: rgb(0, 142, 71);
+  line-height: 17.16px;
+  text-decoration: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath fill='rgb(0,142,71)' d='M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5V80C0 53.5 21.5 32 48 32H197.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z'/%3E%3C/svg%3E")
+    left center / 15px 12px no-repeat;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.flag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  margin-bottom: 16px;
+  border-top: 1px solid #f00;
+  border-bottom: 1px solid #f00;
+  color: #f00;
+  font: 400 12px/18px Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  box-sizing: border-box;
+}
+.addToCart {
+  height: 37px;
+  margin-bottom: 4px;
+  padding: 8px 22px;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(0, 102, 204);
+  color: #fff;
+  font: 500 12px/21px Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.addToCart:hover {
+  background: rgb(0, 71, 142);
+}
+.compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 33px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: rgb(0, 102, 204);
+  font: 500 12px/21px Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
+.compare svg {
+  font-size: 20px;
+}
+
+/* phone layout measured from the live store at 390px: the whole card is outlined, the image is smaller */
+@media (max-width: 599px) {
+  .tile {
+    padding: 8px;
+    border: 1px solid rgb(187, 187, 187);
+  }
+  .media {
+    border: 0;
+  }
+  .imageLink {
+    padding: 32px 4px 4px;
+  }
+  .image {
+    height: 160px;
+  }
+  .price {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .flag {
+    font-size: 10px;
+  }
+}

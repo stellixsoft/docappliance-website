@@ -1,0 +1,4 @@
+/* Service site (www.docappliance.com) theme and CMS header/footer blocks. Loaded only by app/(service). */
+@import "./theme.css";
+@import "./layout/top-bar.css";
+@import "./layout/footer.css";

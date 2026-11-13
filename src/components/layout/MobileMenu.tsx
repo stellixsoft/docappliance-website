@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon, PhoneIcon } from "./icons";
 import styles from "./MobileMenu.module.css";
 
 /** Slide-out drawer used on tablet/mobile and from the sticky "Open Menu" button. */
-export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function MobileMenu({ open, onClose, nav = mainNav }: { open: boolean; onClose: () => void; nav?: NavItem[] }) {
   const [sub, setSub] = useState<NavItem | null>(null);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         {!sub ? (
           <ul className={styles.list}>
             <li className={styles.heading}>Main Menu</li>
-            {mainNav.map((item) => (
+            {nav.map((item) => (
               <li key={item.label} className={styles.item}>
                 {item.children ? (
                   <button type="button" className={`${styles.row} ${styles.rowParent}`} onClick={() => setSub(item)}>

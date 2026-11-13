@@ -1,7 +1,7 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import * as regular from "@fortawesome/free-regular-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faGoogle, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 
 /**
  * Icon set used by the site content.
@@ -40,6 +40,20 @@ const ICONS: Record<string, IconSet> = {
   users: { solid: solid.faUsers },
   wrench: { solid: solid.faWrench },
   "facebook-f": { solid: faFacebookF },
+  "angle-right": { solid: solid.faAngleRight },
+  "arrow-right-long": { solid: solid.faArrowRightLong },
+  award: { solid: solid.faAward },
+  "badge-dollar": { solid: solid.faCircleDollarToSlot },
+  "caret-circle-right": { solid: solid.faCircleChevronRight },
+  "circle-dollar": { solid: solid.faCircleDollarToSlot },
+  "circle-play": { solid: solid.faCirclePlay, regular: regular.faCirclePlay },
+  "map-location": { solid: solid.faMapLocationDot },
+  "person-dolly": { solid: solid.faPersonWalkingLuggage },
+  "shield-halved": { solid: solid.faShieldHalved },
+  "star-sharp": { solid: solid.faStar, regular: regular.faStar },
+  google: { solid: faGoogle },
+  "square-facebook": { solid: faSquareFacebook },
+  "facebook-square": { solid: faSquareFacebook },
 };
 
 type Props = { name: string; variant?: Variant; className?: string; title?: string };

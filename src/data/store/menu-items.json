@@ -1,0 +1,74 @@
+[
+ {
+  "node_id": "21074",
+  "parent_node_id": "0",
+  "sort_order": "20",
+  "label": "Outlet",
+  "href_override": "/catalog/special/brandsource_point_of_sale_marketing/Outlet",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21075",
+  "parent_node_id": "0",
+  "sort_order": "30",
+  "label": "Promotions & Rebates",
+  "href_override": "/promotions",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21076",
+  "parent_node_id": "0",
+  "sort_order": "40",
+  "label": "Services",
+  "href_override": "/services",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21492",
+  "parent_node_id": "21076",
+  "sort_order": "41",
+  "label": "Appliance Repair",
+  "href_override": "https://www.docappliance.com/",
+  "target": "_blank",
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21077",
+  "parent_node_id": "0",
+  "sort_order": "50",
+  "label": "About Us",
+  "href_override": "/about-us",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21078",
+  "parent_node_id": "0",
+  "sort_order": "60",
+  "label": "Financing",
+  "href_override": "/financing",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "21079",
+  "parent_node_id": "0",
+  "sort_order": "70",
+  "label": "Contact Us",
+  "href_override": "/contacts",
+  "target": null,
+  "top_menu_visibility": "1"
+ },
+ {
+  "node_id": "22075",
+  "parent_node_id": "0",
+  "sort_order": "80",
+  "label": "Appliance Service",
+  "href_override": "https://www.docappliance.com/",
+  "target": "_blank",
+  "top_menu_visibility": "1"
+ }
+]

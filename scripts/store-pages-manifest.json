@@ -1,0 +1,401 @@
+[
+  {
+    "slug": "about-us",
+    "route": "/about-us",
+    "component": "AboutUsContent",
+    "title": "Locally Owned Appliance Store | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We offer a large selection of appliances with a highly experienced sales staff. Stop by today! "
+  },
+  {
+    "slug": "accessibility",
+    "route": "/accessibility",
+    "component": "AccessibilityContent",
+    "title": "Accessibility | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "aga-overview",
+    "route": "/aga-overview",
+    "component": "AgaOverviewContent",
+    "title": "AGA Overview | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "appliance-repair",
+    "route": "/appliance-repair",
+    "component": "ApplianceRepairContent",
+    "title": "Appliance Repair | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "bodewell-membership-terms",
+    "route": "/bodewell-membership-terms",
+    "component": "BodewellMembershipTermsContent",
+    "title": "Bodewell Membership Terms | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "brands",
+    "route": "/brands",
+    "component": "BrandsContent",
+    "title": "Shop by Brands | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We carry a wide variety of appliance brands at discount prices. Shop our huge selection of brands today! "
+  },
+  {
+    "slug": "cafe-overview-ca",
+    "route": "/cafe-overview-ca",
+    "component": "CafeOverviewCaContent",
+    "title": "Café Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliances with personality. Shop our Café ranges, refrigerators, dishwashers and more, and make them yours with customizable hardware finishes. "
+  },
+  {
+    "slug": "cafe-overview",
+    "route": "/cafe-overview",
+    "component": "CafeOverviewContent",
+    "title": "Cafe Kitchen Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Discover CAFE appliances. Browse kitchen and home categories, explore featured products, and find the right fit for your space. "
+  },
+  {
+    "slug": "contacts",
+    "route": "/contacts",
+    "component": "ContactsContent",
+    "title": "Shop Kitchen & Home Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We have everyday savings on quality home appliances. Shop our showrooms in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; and Salina, KS for instant savings. "
+  },
+  {
+    "slug": "electrolux-laundry-overview",
+    "route": "/electrolux-laundry-overview",
+    "component": "ElectroluxLaundryOverviewContent",
+    "title": "Electrolux Laundry Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "You deserve the 5-star hotel quality of Electrolux laundry appliances. Learn more about the latest innovations and features from Electrolux today! "
+  },
+  {
+    "slug": "electrolux-overview-ca",
+    "route": "/electrolux-overview-ca",
+    "component": "ElectroluxOverviewCaContent",
+    "title": "Electrolux Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Shop our Electrolux washers, dryers, refrigerators, dishwashers, ranges, cooktops, wall ovens, microwaves and ventilation for a kitchen that works beautifully. "
+  },
+  {
+    "slug": "electrolux-overview",
+    "route": "/electrolux-overview",
+    "component": "ElectroluxOverviewContent",
+    "title": "Electrolux Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Discover Electrolux appliances. Browse kitchen and home categories, explore featured products, and find the right fit for your space. "
+  },
+  {
+    "slug": "financing",
+    "route": "/financing",
+    "component": "FinancingContent",
+    "title": "Special Financing & Easy Payment Options | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Weekly Specials, Huge Savings & Special Financing on Appliances. Apply Now! "
+  },
+  {
+    "slug": "frigidaire-gallery-overview",
+    "route": "/frigidaire-gallery-overview",
+    "component": "FrigidaireGalleryOverviewContent",
+    "title": "Frigidaire Gallery Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Cook smarter with Frigidaire Gallery. Shop our refrigerators, dishwashers, microwaves and ranges, plus wall ovens with Total Convection and Air Fry. "
+  },
+  {
+    "slug": "frigidaire-gallery-stone-baked-pizza-oven",
+    "route": "/frigidaire-gallery-stone-baked-pizza-oven",
+    "component": "FrigidaireGalleryStoneBakedPizzaOvenContent",
+    "title": "Frigidaire Gallery - Stone Baked Pizza Oven | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "frigidaire-overview",
+    "route": "/frigidaire-overview",
+    "component": "FrigidaireOverviewContent",
+    "title": "Frigidaire Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Frigidaire specializes in high-quality, energy efficient laundry and kitchen appliances. Discover the Frigidaire collections today! "
+  },
+  {
+    "slug": "frigidaire-professional-overview",
+    "route": "/frigidaire-professional-overview",
+    "component": "FrigidaireProfessionalOverviewContent",
+    "title": "Frigidaire Professional Series | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Eye-catching design, jaw-dropping performance. Shop our Frigidaire Professional refrigerators, ranges, cooktops, wall ovens, dishwashers and microwaves. "
+  },
+  {
+    "slug": "ge-overview-ca",
+    "route": "/ge-overview-ca",
+    "component": "GeOverviewCaContent",
+    "title": "GE Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Appliances for every home. Shop our GE refrigerators, ranges, dishwashers, microwaves, washers and dryers for your kitchen and laundry room. "
+  },
+  {
+    "slug": "ge-overview",
+    "route": "/ge-overview",
+    "component": "GeOverviewContent",
+    "title": "GE Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Discover GE appliances. Browse kitchen and home categories, explore featured products, and find the right fit for your space. "
+  },
+  {
+    "slug": "ge-profile-overview-ca",
+    "route": "/ge-profile-overview-ca",
+    "component": "GeProfileOverviewCaContent",
+    "title": "GE Profile Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Smart features, sophisticated design. Shop our GE Profile dishwashers, laundry, refrigerators and cooking appliances made to simplify everyday life. "
+  },
+  {
+    "slug": "ge-profile-overview",
+    "route": "/ge-profile-overview",
+    "component": "GeProfileOverviewContent",
+    "title": "GE Profile Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Smart features, sophisticated design. Shop our GE Profile dishwashers, laundry, refrigerators and cooking appliances made to simplify everyday life. "
+  },
+  {
+    "slug": "haier-overview-ca",
+    "route": "/haier-overview-ca",
+    "component": "HaierOverviewCaContent",
+    "title": "Haier Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Bring the unexpected to life. Shop our Haier washers, dryers, refrigerators, cooking appliances and dishwashers, designed to make everyday living easier. "
+  },
+  {
+    "slug": "haier-overview",
+    "route": "/haier-overview",
+    "component": "HaierOverviewContent",
+    "title": "Haier Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Bring the unexpected to life. Shop our Haier washers, dryers, refrigerators, cooking appliances and dishwashers, designed to make everyday living easier. "
+  },
+  {
+    "slug": "home",
+    "route": "/",
+    "component": "HomeContent",
+    "title": "Save on Kitchen & Home Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Doctor Appliance is a family-owned appliance retailer in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; and Salina, KS. We offer competitive pricing, service and delivery on kitchen & home appliances. Shop now!    "
+  },
+  {
+    "slug": "lacornue-overview-ca",
+    "route": "/lacornue-overview-ca",
+    "component": "LacornueOverviewCaContent",
+    "title": "La Cornue Ranges | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Where customization meets craftsmanship. Explore our La Cornue gas and induction ranges, ventilation and accessories, including the CornuFé collection. "
+  },
+  {
+    "slug": "lacornue-overview",
+    "route": "/lacornue-overview",
+    "component": "LacornueOverviewContent",
+    "title": "La Cornue Ranges | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Where customization meets craftsmanship. Explore our La Cornue gas and induction ranges, ventilation and accessories, including the CornuFé collection. "
+  },
+  {
+    "slug": "lg-appliance-home-entertainment-overview",
+    "route": "/lg-appliance-home-entertainment-overview",
+    "component": "LgApplianceHomeEntertainmentOverviewContent",
+    "title": "LG Appliances & Home Entertainment | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Smarter living with LG. Shop our LG refrigerators, cooking, dishwashers, laundry and vacuums, plus OLED and LED TVs to connect your whole home. "
+  },
+  {
+    "slug": "lg-overview",
+    "route": "/lg-overview",
+    "component": "LgOverviewContent",
+    "title": "LG Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Make every day easier with LG. Shop our LG refrigerators, ranges, dishwashers and front- and top-load laundry, packed with smart, time-saving features. "
+  },
+  {
+    "slug": "lg-signature-overview",
+    "route": "/lg-signature-overview",
+    "component": "LgSignatureOverviewContent",
+    "title": "LG SIGNATURE Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "High design with performance to match. Explore our LG SIGNATURE refrigerators, cooking appliances, dishwashers and laundry for the luxury home. "
+  },
+  {
+    "slug": "lg-studio-overview",
+    "route": "/lg-studio-overview",
+    "component": "LgStudioOverviewContent",
+    "title": "LG STUDIO Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Stay creative in the kitchen. Shop our LG STUDIO ranges with InstaView, multifunction cooking and EasyClean, plus a full suite of premium appliances. "
+  },
+  {
+    "slug": "locations_estill-springs",
+    "route": "/locations/estill-springs",
+    "component": "LocationsEstillSpringsContent",
+    "title": "Estill Springs | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "locations_knoxville",
+    "route": "/locations/knoxville",
+    "component": "LocationsKnoxvilleContent",
+    "title": "Knoxville | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "locations_phoenix",
+    "route": "/locations/phoenix",
+    "component": "LocationsPhoenixContent",
+    "title": "Phoenix | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "locations_salina",
+    "route": "/locations/salina",
+    "component": "LocationsSalinaContent",
+    "title": "Salina | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "lynx-grills-overview",
+    "route": "/lynx-grills-overview",
+    "component": "LynxGrillsOverviewContent",
+    "title": "Lynx Outdoor Grills | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Live the Lynx life. Shop our Lynx Professional and Sedona by Lynx grills, outdoor refrigeration, sinks and bar centers, and grill accessories. "
+  },
+  {
+    "slug": "marvel-refrigeration-overview",
+    "route": "/marvel-refrigeration-overview",
+    "component": "MarvelRefrigerationOverviewContent",
+    "title": "Marvel Refrigeration | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Thoughtfully designed for indoors and out. Shop our Marvel beverage centers, wine preservation units, compact refrigerators and ice machines for any space. "
+  },
+  {
+    "slug": "privacy-policies_california-privacy-rights",
+    "route": "/privacy-policies/california-privacy-rights",
+    "component": "PrivacyPoliciesCaliforniaPrivacyRightsContent",
+    "title": "California Privacy Rights | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Residents of California have additional data privacy rights under the California Consumer Privacy Act (CCPA) regarding collection of their personal information. "
+  },
+  {
+    "slug": "privacy-policies_do-not-sell-my-personal-information",
+    "route": "/privacy-policies/do-not-sell-my-personal-information",
+    "component": "PrivacyPoliciesDoNotSellMyPersonalInformationContent",
+    "title": "Do Not Sell My Information | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We do not sell your personally identifiable information to anyone. We use your data to provide and improve your experience while visiting our website. "
+  },
+  {
+    "slug": "privacy-policies_general-privacy-policy",
+    "route": "/privacy-policies/general-privacy-policy",
+    "component": "PrivacyPoliciesGeneralPrivacyPolicyContent",
+    "title": "Website Privacy Policy | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Want to know how we collect and use your data? Learn more about our privacy policies including the types of data we collect and third-party services. Your privacy when you shop online is important. Learn more about our privacy policies concerning your data, payment information, and third-party services. "
+  },
+  {
+    "slug": "privacy-policies_terms-and-conditions",
+    "route": "/privacy-policies/terms-and-conditions",
+    "component": "PrivacyPoliciesTermsAndConditionsContent",
+    "title": "Website Terms and Conditions | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "privacy-policy-cookie-restriction-mode",
+    "route": "/privacy-policy-cookie-restriction-mode",
+    "component": "PrivacyPolicyCookieRestrictionModeContent",
+    "title": "Privacy Policy | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "privacy",
+    "route": "/privacy",
+    "component": "PrivacyContent",
+    "title": "Privacy Policy | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "This Privacy Policy applies to www.brandsource.com/ owned and operated by BrandSource. This Privacy Policy describes how BrandSource collects, uses, shares and secures the personal information you provide "
+  },
+  {
+    "slug": "privacy_california-privacy-rights",
+    "route": "/privacy/california-privacy-rights",
+    "component": "PrivacyCaliforniaPrivacyRightsContent",
+    "title": "California Privacy Rights | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "promotions",
+    "route": "/promotions",
+    "component": "PromotionsContent",
+    "title": "Promotions | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Browse the latest promotions and rebates."
+  },
+  {
+    "slug": "request-quote",
+    "route": "/request-quote",
+    "component": "RequestQuoteContent",
+    "title": "Request A Quote | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": ""
+  },
+  {
+    "slug": "return-and-store-policies",
+    "route": "/return-and-store-policies",
+    "component": "ReturnAndStorePoliciesContent",
+    "title": "Return & Store Policies | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Learn more about our online store policies, terms, and conditions.\t "
+  },
+  {
+    "slug": "scotsman-overview",
+    "route": "/scotsman-overview",
+    "component": "ScotsmanOverviewContent",
+    "title": "Scotsman Ice Machines | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "An unexpected luxury: perfect ice at home. Shop our Scotsman indoor and outdoor ice machines and undercounter freezers for kitchens and home bars. "
+  },
+  {
+    "slug": "services",
+    "route": "/services",
+    "component": "ServicesContent",
+    "title": "Schedule Appliance Service & Appliance Repair  | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "We have factory trained technicians for appliance service & appliance repair. Call today for an appointment! "
+  },
+  {
+    "slug": "signature-kitchen-suite-overview",
+    "route": "/signature-kitchen-suite-overview",
+    "component": "SignatureKitchenSuiteOverviewContent",
+    "title": "SKS Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Built for those who live to cook. Explore our SKS cooking, refrigeration and dishwashers, made with true-to-food technology.\r\n "
+  },
+  {
+    "slug": "sks-overview-ca",
+    "route": "/sks-overview-ca",
+    "component": "SksOverviewCaContent",
+    "title": "Signature Kitchen Suite Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "For those who live by Technicurean standards. Shop our Signature Kitchen Suite cooking, refrigeration and dishwashers, built with uncompromising quality. "
+  },
+  {
+    "slug": "sks-overview",
+    "route": "/sks-overview",
+    "component": "SksOverviewContent",
+    "title": "SKS Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Built for those who live to cook. Explore our SKS cooking, refrigeration and dishwashers, made with true-to-food technology.\r\n "
+  },
+  {
+    "slug": "speed-queen-overview",
+    "route": "/speed-queen-overview",
+    "component": "SpeedQueenOverviewContent",
+    "title": "Speed Queen Laundry | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Built better to last longer. Shop our Speed Queen washers and dryers, made for durable, reliable cleaning with options like Perfect Wash and Pet Plus. "
+  },
+  {
+    "slug": "u-line-overview",
+    "route": "/u-line-overview",
+    "component": "ULineOverviewContent",
+    "title": "U-Line Refrigeration | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "The art of integrated refrigeration. Shop our U-Line beverage centers, wine preservation, refrigerators and ice machines for indoor and outdoor spaces. "
+  },
+  {
+    "slug": "viking-overview-ca",
+    "route": "/viking-overview-ca",
+    "component": "VikingOverviewCaContent",
+    "title": "Viking Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Discover why kitchens begin with Viking. Shop our Viking cooking, ventilation, refrigeration, cleanup and outdoor kitchen appliances in the 7, 5 and 3 Series. "
+  },
+  {
+    "slug": "viking-overview",
+    "route": "/viking-overview",
+    "component": "VikingOverviewContent",
+    "title": "Viking Kitchen Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Viking offers complete ultra-premium kitchens & truly consistent design. "
+  },
+  {
+    "slug": "zephyr-overview-ca",
+    "route": "/zephyr-overview-ca",
+    "component": "ZephyrOverviewCaContent",
+    "title": "Zephyr Range Hoods and Refrigeration | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Design beyond expectations. Shop our Zephyr range hoods and Presrv refrigeration, designed to look as good as they perform in any home kitchen. "
+  },
+  {
+    "slug": "zephyr-overview",
+    "route": "/zephyr-overview",
+    "component": "ZephyrOverviewContent",
+    "title": "Zephyr Range Hoods & Refrigeration | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS",
+    "description": "Design beyond expectations. Shop our Zephyr range hoods and Presrv refrigeration, designed to look as good as they perform in any home kitchen. "
+  }
+]

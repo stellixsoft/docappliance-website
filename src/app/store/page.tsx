@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
+import HomeContent from "@/content/store/HomeContent";
+import "@/styles/store/pages/home.css";
 
-export const metadata: Metadata = { title: "Appliance Sales | Doctor Appliance", robots: { index: false } };
+export const metadata: Metadata = {
+  "title": {
+    "absolute": "Save on Kitchen & Home Appliances | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS"
+  },
+  "description": "Doctor Appliance is a family-owned appliance retailer in Estill Springs, TN; Knoxville, TN; Phoenix, AZ; and Salina, KS. We offer competitive pricing, service and delivery on kitchen & home appliances. Shop now!    ",
+  "alternates": {
+    "canonical": "/"
+  }
+};
 
-/**
- * Placeholder for sales.docappliance.com. Requests to that host are rewritten to /store/*
- * by src/middleware.ts, so the store can be built here with its existing URLs
- * (/catalog/..., /product/..., /checkout/...).
- */
-export default function StoreHome() {
-  return (
-    <main style={{ padding: "4rem 1rem", textAlign: "center", fontFamily: "Open Sans, sans-serif" }}>
-      <h1>Appliance Sales</h1>
-      <p>The store front end will be built in this section.</p>
-    </main>
-  );
+export default function Page() {
+  return <HomeContent />;
 }

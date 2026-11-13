@@ -4,30 +4,41 @@ const fs = require('fs');
 const path = require('path');
 const { parseDocument } = require('htmlparser2');
 const postcss = require('postcss');
+// Browsers skip malformed CMS rules instead of failing; the safe parser does the same.
+const safeParser = require('postcss-safe-parser');
 const prefixer = require('postcss-prefix-selector');
 
 const [, , RENDERED, PROJECT] = process.argv;
-const SITE = 'https://www.docappliance.com';
+// NS=store ports the sales site into its own folders so the service site's files are never touched.
+const STORE = process.env.NS === 'store';
+const SITE = STORE ? 'https://sales.docappliance.com' : 'https://www.docappliance.com';
+const OUT = STORE
+  ? { content: 'src/content/store', styles: 'src/styles/store/pages', scope: 'store-page-', manifest: 'scripts/store-pages-manifest.json', layout: 'src/components/store', layoutCss: 'src/styles/store', assets: 'scripts/store-assets.json' }
+  : { content: 'src/content/pages', styles: 'src/styles/pages', scope: 'page-', manifest: 'scripts/pages-manifest.json', layout: 'src/components/layout', layoutCss: 'src/styles/layout', assets: 'scripts/assets.json' };
 const assets = new Map(); // remote url -> local public path
 
 // ---------- helpers ----------
 const ATTR_MAP = {
   class: 'className', for: 'htmlFor', tabindex: 'tabIndex', readonly: 'readOnly', maxlength: 'maxLength',
   minlength: 'minLength', autocomplete: 'autoComplete', frameborder: 'frameBorder', allowfullscreen: 'allowFullScreen',
-  srcset: 'srcSet', crossorigin: 'crossOrigin', fetchpriority: 'fetchPriority', novalidate: 'noValidate',
+  srcset: 'srcSet', autoplay: 'autoPlay', playsinline: 'playsInline', crossorigin: 'crossOrigin', fetchpriority: 'fetchPriority', novalidate: 'noValidate',
   enctype: 'encType', 'accept-charset': 'acceptCharset', spellcheck: 'spellCheck', colspan: 'colSpan', rowspan: 'rowSpan',
   'stroke-width': 'strokeWidth', 'stroke-linecap': 'strokeLinecap', 'stroke-linejoin': 'strokeLinejoin',
   'fill-rule': 'fillRule', 'clip-rule': 'clipRule', 'xlink:href': 'xlinkHref', viewbox: 'viewBox',
   'stroke-miterlimit': 'strokeMiterlimit', referrerpolicy: 'referrerPolicy', datetime: 'dateTime',
   allowtransparency: 'allowTransparency', marginheight: 'marginHeight', marginwidth: 'marginWidth', scrolling: 'scrolling',
 };
-const BOOL_ATTRS = new Set(['required', 'disabled', 'allowfullscreen', 'readonly', 'multiple', 'novalidate', 'hidden', 'autofocus']);
+const BOOL_ATTRS = new Set(['required', 'disabled', 'allowfullscreen', 'readonly', 'multiple', 'novalidate', 'hidden', 'autofocus', 'autoplay', 'muted', 'loop', 'playsinline', 'controls']);
+// React types these as numbers.
+const NUM_ATTRS = new Set(['tabindex', 'colspan', 'rowspan', 'maxlength', 'minlength', 'width', 'height']);
 const VOID = new Set(['img', 'br', 'hr', 'input', 'meta', 'link', 'source', 'area', 'col', 'wbr', 'embed']);
 const camel = s => s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 const q = s => JSON.stringify(s);
 
 function localAsset(url) {
   if (!/^https?:\/\/(cdn|assets)\.avbportal\.com\//.test(url)) return url;
+  // Manufacturer videos (100MB+) stay on the CDN; images are copied into /public.
+  if (/\.(mp4|webm|mov)(\?|$)/i.test(url)) return url;
   if (assets.has(url)) return assets.get(url);
   const u = new URL(url);
   let p = u.pathname.replace(/^\/(magento-media|assets)\//, '/').replace(/\/members\/h0136_1-doctor-appliance\//, '/doctor-appliance/');
@@ -72,9 +83,7 @@ function attrsToJsx(name, attribs, opts = {}) {
     if (name === 'svg' && lk === 'focusable') { out.push(`focusable=${q(v)}`); continue; }
     const jk = ATTR_MAP[lk] || (lk.startsWith('data-') || lk.startsWith('aria-') ? lk : camel(lk));
     if (BOOL_ATTRS.has(lk) && (v === '' || v === lk)) { out.push(jk); continue; }
-    if (lk === 'width' || lk === 'height') {
-      if (/^\d+$/.test(v)) { out.push(`${jk}={${v}}`); continue; }
-    }
+    if (NUM_ATTRS.has(lk) && /^-?\d+$/.test(v)) { out.push(`${jk}={${v}}`); continue; }
     out.push(/[\\"]/.test(v) ? `${jk}={${q(v)}}` : `${jk}=${q(v)}`);
   }
   return out.length ? ' ' + out.join(' ') : '';
@@ -95,7 +104,7 @@ const elKids = el => kids(el).filter(c => c.type === 'tag');
 // Font Awesome classes -> Icon component
 function iconFromClasses(c) {
   const parts = c.split(/\s+/);
-  const names = parts.filter(p => /^fa-/.test(p) && !['fa-sharp', 'fa-solid', 'fa-light', 'fa-regular', 'fa-brands'].includes(p));
+  const names = parts.filter(p => /^fa-/.test(p) && !['fa-sharp', 'fa-solid', 'fa-light', 'fa-regular', 'fa-brands', 'fa-utility', 'fa-semibold', 'fa-thin', 'fa-duotone', 'fa-fw'].includes(p));
   if (!names.length) return null;
   const variant = parts.includes('fab') ? 'brands' : (parts.includes('fal') || parts.includes('fa-light')) ? 'light' : (parts.includes('far') ? 'regular' : 'solid');
   const rest = parts.filter(p => !/^fa-/.test(p) && !['fa', 'fas', 'fal', 'far', 'fab'].includes(p)).join(' ');
@@ -157,17 +166,31 @@ function convert(node, ind = 0, ctx = {}) {
 
   // Platform carousel (mobile only) -> MobileCarousel
   if (/carousel\b/.test(c) && /mui-[a-z0-9]+-carousel\b/.test(c)) {
-    used.add('MobileCarousel');
     const slides = [];
     const walk = n => elKids(n).forEach(k => /carouselItem\b|carouselItem-/.test(cls(k)) ? (!/Hidden/.test(cls(k)) && slides.push(k)) : walk(k));
     walk(node);
     const extra = c.split(/\s+/).filter(x => !x.startsWith('mui-')).join(' ');
     const body = slides.map(s => `${pad}  <div className="mobile-carousel__slide">\n${kids(s).map(k => convert(k, ind + 2)).filter(Boolean).join('\n')}\n${pad}  </div>`).join('\n');
-    return `${pad}<MobileCarousel className=${q(extra)}>\n${body}\n${pad}</MobileCarousel>`;
+    // product carousel ("Featured Products"): the platform renders these tiles in the browser, so emit a
+    // component that loads the same products instead of copying the rendered tile markup
+    const productKeys = slides.map(sl => { const a = findFirst(sl, n => n.name === 'a' && /^\/product\//.test((n.attribs && n.attribs.href) || '')); return a ? a.attribs.href.replace(/^\/product\//, '') : null; });
+    if (slides.length && productKeys.every(Boolean) && slides.every(sl => findFirst(sl, n => n.name === 'article'))) {
+      used.add('FeaturedProducts');
+      const inner0 = findFirst(node, n => /carouselItemsInner/.test(cls(n)));
+      const pct0 = inner0 && /grid-auto-columns:\s*([\d.]+)%/.exec((inner0.attribs && inner0.attribs.style) || '');
+      return `${pad}<FeaturedProducts productKeys={${JSON.stringify(productKeys)}} perView={${pct0 ? Math.round(100 / parseFloat(pct0[1])) : 4}} />`;
+    }
+    used.add('MobileCarousel');
+    // items per view at capture width, from the track's inline grid-auto-columns (e.g. 25% -> 4)
+    const inner = findFirst(node, n => /carouselItemsInner/.test(cls(n)));
+    const pct = inner && /grid-auto-columns:\s*([\d.]+)%/.exec((inner.attribs && inner.attribs.style) || '');
+    // a desktop-hidden carousel is a mobile strip: one item per view
+    const perView = pct && !/desktop-hide/.test(extra) ? Math.round(100 / parseFloat(pct[1])) : 1;
+    return `${pad}<MobileCarousel className=${q(extra)}${perView > 1 ? ` perView={${perView}}` : ''}>\n${body}\n${pad}</MobileCarousel>`;
   }
 
   // custom elements -> divs with class
-  if (name.startsWith('avb-')) {
+  if (name.startsWith('avb-') || name.startsWith('dsg-')) {
     a.class = (name + ' ' + c).trim();
     name = name === 'avb-designer-block' || name === 'avb-designer-contact' || name === 'avb-designer-footer' ? 'section' : 'div';
   }
@@ -199,6 +222,7 @@ function imports() {
   if (used.has('ManagedForm')) lines.push(`import { ManagedForm } from "@/components/forms/ManagedForm";`);
   if (used.has('Captcha')) lines.push(`import { Captcha } from "@/components/forms/Captcha";`);
   if (used.has('MobileCarousel')) lines.push(`import { MobileCarousel } from "@/components/ui/MobileCarousel";`);
+  if (used.has('FeaturedProducts')) lines.push(`import { FeaturedProducts } from "@/components/store/FeaturedProducts";`);
   return lines.join('\n');
 }
 
@@ -218,12 +242,33 @@ function cleanCss(css) {
   css = css.replace(/url\((['"]?)(?!\/|data:|https?:)[^'")]*\1\)/g, 'none');
   // browsers auto-close unbalanced blocks at the end of a <style>; do the same
   { const open = (css.match(/{/g) || []).length - (css.match(/}/g) || []).length; if (open > 0) css += '}'.repeat(open); }
-  const root = postcss.parse(css);
+  const root = safeParser(css);
   root.walkRules(r => {
     if (r.parent && r.parent.type === 'atrule' && /keyframes/.test(r.parent.name)) return;
-    r.selector = r.selector.replace(/(^|[\s>+~,(])(avb-[a-z-]+)(?=$|[\s.:#\[>+~,)])/g, '$1.$2');
+    r.selector = r.selector.replace(/(^|[\s>+~,(])((?:avb|dsg)-[a-z-]+)(?=$|[\s.:#\[>+~,)])/g, '$1.$2');
   });
-  return root.toString();
+  // Drop declarations a browser would ignore (e.g. "order 2" without a colon, "color: #000, !important"),
+  // so the stylesheet also passes the strict parser used by Next.js.
+  root.walkDecls(d => {
+    const v = d.value.replace(/url\([^)]*\)/g, 'url()');
+    if (!/^(--)?-?[a-zA-Z][a-zA-Z0-9-]*$/.test(d.prop) || /;|!important\s*\S/.test(v) || /^,|,\s*$/.test(v.trim()) || /[,;]\s*!important/.test(v)) d.remove();
+  });
+  return strictSafe(root.toString());
+}
+
+/** Remove stray characters (an extra "}" etc.) until the strict parser accepts the CSS, like a browser recovers. */
+function strictSafe(css) {
+  for (let i = 0; i < 50; i++) {
+    try { postcss.parse(css); return css; } catch (e) {
+      if (!e.input || e.input.offset === undefined) throw e;
+      const at = e.input.offset;
+      if (css[at] === '}') { css = css.slice(0, at) + css.slice(at + 1); continue; }
+      // drop the rest of the broken statement up to the next ; or }
+      const end = css.slice(at).search(/[;}]/);
+      css = css.slice(0, at) + (end < 0 ? '' : css.slice(at + end + (css[at + end] === ';' ? 1 : 0)));
+    }
+  }
+  return css;
 }
 function scopeCss(css, scope) {
   return postcss([prefixer({
@@ -232,7 +277,7 @@ function scopeCss(css, scope) {
       if (/^(html|body|:root)\b/.test(selector)) return selector.replace(/^(html|body|:root)/, prefix);
       return prefixed;
     },
-  })]).process(css, { from: undefined }).css;
+  })]).process(css, { from: undefined, parser: safeParser }).css;
 }
 
 function componentName(slug) {
@@ -251,20 +296,21 @@ for (const slug of pages) {
   used.clear();
   const body = kids(avbMain).map(k => convert(k, 3)).filter(Boolean).join('\n');
   const comp = componentName(slug);
-  const scope = `page-${slug}`;
+  const scope = `${OUT.scope}${slug}`;
   const tsx = `${imports()}\n\n/** Page content for /${slug === 'home' ? '' : slug.replace(/_/g, '/')} (ported from the live CMS markup). */\nexport default function ${comp}() {\n  return (\n    <div className="avb-main ${scope}">\n${body}\n    </div>\n  );\n}\n`;
-  write(path.join(PROJECT, 'src/content/pages', comp + '.tsx'), tsx.replace(/^\n+/, ''));
+  write(path.join(PROJECT, OUT.content, comp + '.tsx'), tsx.replace(/^\n+/, ''));
   // page css from head <style data-from="cms">
   const head = findFirst(doc, n => n.name === 'head');
-  const cmsStyle = findFirst(head, n => n.name === 'style' && n.attribs['data-from'] === 'cms');
-  let css = cmsStyle ? kids(cmsStyle).map(t => t.data).join('') : '';
+  // a page can carry its CMS css in more than one <style data-from="cms">
+  const cmsStyles = kids(head).filter(n => n.name === 'style' && n.attribs && n.attribs['data-from'] === 'cms');
+  let css = cmsStyles.map(st => kids(st).map(t => t.data).join('')).join('\n');
   css += '\n' + styleTexts(main).join('\n');
-  write(path.join(PROJECT, 'src/styles/pages', slug + '.css'), scopeCss(cleanCss(css), '.' + scope));
+  write(path.join(PROJECT, OUT.styles, slug + '.css'), scopeCss(cleanCss(css), '.' + scope));
   const title = (findFirst(head, n => n.name === 'title') || { children: [] }).children.map(t => t.data).join('');
   const descEl = findFirst(head, n => n.name === 'meta' && n.attribs.name === 'description');
   manifest.push({ slug, route: slug === 'home' ? '/' : '/' + slug.replace(/_/g, '/'), component: comp, title, description: descEl ? descEl.attribs.content : '' });
 }
-write(path.join(PROJECT, 'scripts/pages-manifest.json'), JSON.stringify(manifest, null, 2));
+write(path.join(PROJECT, OUT.manifest), JSON.stringify(manifest, null, 2));
 
 // ---------- shared blocks (top bar + footer) from home ----------
 {
@@ -272,30 +318,47 @@ write(path.join(PROJECT, 'scripts/pages-manifest.json'), JSON.stringify(manifest
   const hb = findFirst(doc, n => n.name === 'avb-header-before');
   used.clear();
   let body = kids(hb).map(k => convert(k, 2)).filter(Boolean).join('\n');
-  write(path.join(PROJECT, 'src/components/layout/TopBar.tsx'),
+  write(path.join(PROJECT, OUT.layout, 'TopBar.tsx'),
     `${imports()}\n\n/** Blue service-area bar shown above the header. */\nexport function TopBar() {\n  return (\n    <div className="avb-header-before">\n${body}\n    </div>\n  );\n}\n`.replace(/^\n+/, ''));
-  write(path.join(PROJECT, 'src/styles/layout/top-bar.css'), cleanCss(styleTexts(hb.parent).join('\n')));
+  write(path.join(PROJECT, OUT.layoutCss, 'top-bar.css'), cleanCss(styleTexts(hb.parent).join('\n')));
 
   const footer = findFirst(doc, n => n.name === 'footer');
   const avbFooter = findFirst(footer, n => n.name === 'avb-footer');
   used.clear();
   body = kids(avbFooter).map(k => convert(k, 3)).filter(Boolean).join('\n');
-  write(path.join(PROJECT, 'src/components/layout/FooterBlocks.tsx'),
+  write(path.join(PROJECT, OUT.layout, 'FooterBlocks.tsx'),
     `${imports()}\n\n/** Newsletter, link columns and copyright (ported from the CMS footer). */\nexport function FooterBlocks() {\n  return (\n    <div className="avb-footer">\n${body}\n    </div>\n  );\n}\n`.replace(/^\n+/, ''));
-  write(path.join(PROJECT, 'src/styles/layout/footer.css'), cleanCss(styleTexts(footer).join('\n')));
+  write(path.join(PROJECT, OUT.layoutCss, 'footer.css'), cleanCss(styleTexts(footer).join('\n')));
 
+  const ha = STORE && findFirst(doc, n => n.name === 'avb-header-after');
+  if (ha) {
+    used.clear();
+    const hbody = kids(ha).map(k => convert(k, 2)).filter(Boolean).join('\n');
+    write(path.join(PROJECT, OUT.layout, 'PromoBar.tsx'),
+      `${imports()}\n\n/** Black promotions bar shown under the store header. */\nexport function PromoBar() {\n  return (\n    <div className="avb-header-after">\n${hbody}\n    </div>\n  );\n}\n`.replace(/^\n+/, ''));
+    write(path.join(PROJECT, OUT.layoutCss, 'promo-bar.css'), cleanCss(styleTexts(ha.parent).join('\n')));
+  }
+  if (STORE) {
+    const head = findFirst(doc, n => n.name === 'head');
+    const ssi = findFirst(head, n => n.name === 'style' && n.attribs['data-from'] === 'static-block-site-styles-inline');
+    write(path.join(PROJECT, OUT.layoutCss, 'theme.css'), '/* Doctor Appliance store theme tokens and dsg-tools utility classes. */\n' + cleanCss(kids(ssi).map(t => t.data).join('')));
+  }
   // emotion css for the magento form wrapper
+  if (!STORE) {
   const emo = [];
   const walkStyles = n => kids(n).forEach(k => { if (k.type === 'style') emo.push(kids(k).map(t => t.data).join('')); else if (k.type === 'tag') walkStyles(k); });
   walkStyles(doc);
   const formCss = emo.join('\n').match(/\.mui-1x4pf05-form[^{]*\{[^}]*\}/g) || [];
   write(path.join(PROJECT, 'src/styles/design-system/magento-form.css'), formCss.join('\n').replace(/\.mui-1x4pf05-form/g, '.magento-form'));
+  }
 }
 
 // ---------- global stylesheets ----------
 const CSSDIR = path.join(RENDERED, '..', 'css');
+if (!STORE) {
 write(path.join(PROJECT, 'src/styles/design-system/avb-ui.css'), '/* AVB UI design system (grid, typography, buttons, forms). Ported from the live site. */\n' + cleanCss(fs.readFileSync(path.join(CSSDIR, 'avb-ui-styles.css'), 'utf8')));
 write(path.join(PROJECT, 'src/styles/theme.css'), '/* Doctor Appliance theme tokens and dsg-tools utility classes. */\n' + cleanCss(fs.readFileSync(path.join(CSSDIR, 'static-block-site-styles-inline.css'), 'utf8')));
-write(path.join(PROJECT, 'scripts/assets.json'), JSON.stringify(Object.fromEntries(assets), null, 2));
+}
+write(path.join(PROJECT, OUT.assets), JSON.stringify(Object.fromEntries(assets), null, 2));
 console.log('pages', pages.length, 'assets', assets.size);
 module.exports = { cleanCss, localAsset };

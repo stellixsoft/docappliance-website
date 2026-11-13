@@ -1,0 +1,56 @@
+/* Store (sales.docappliance.com) theme, CMS header/footer blocks and shared store widgets. Loaded only by app/store. */
+@import "./store/theme.css";
+@import "./store/top-bar.css";
+@import "./store/promo-bar.css";
+@import "./store/footer.css";
+
+/* star rating (MUI Rating look) */
+.store-rating {
+  display: inline-flex;
+  color: rgb(240, 111, 77);
+  line-height: 1;
+}
+.store-rating__star {
+  position: relative;
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+}
+.store-rating__empty {
+  color: rgba(0, 0, 0, 0.26);
+}
+.store-rating__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Featured products carousel on CMS pages */
+.featured-products__slide {
+  display: flex;
+  padding: 0 12px;
+}
+.featured-products__slide > * {
+  flex: 1 1 auto;
+}
+/* On phones the live strip scrolls sideways with the next tile peeking in, without arrows. */
+@media (max-width: 599px) {
+  .featured-products .mobile-carousel__button {
+    display: none;
+  }
+  .featured-products .mobile-carousel__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .featured-products .mobile-carousel__track {
+    grid-auto-columns: 78% !important;
+    transform: none !important;
+  }
+  .featured-products__slide {
+    padding: 0 8px 0 0;
+    scroll-snap-align: start;
+  }
+}

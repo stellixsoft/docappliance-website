@@ -1,0 +1,428 @@
+/* Category page. Values measured from the live store at 1440px; breakpoints follow MUI (600 / 900 / 1200). */
+.page {
+  background: #fff;
+  font: 400 16px/18.4px Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+/* breadcrumbs */
+.crumbsWrap {
+  padding: 16px 0 0 8px;
+}
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.8px;
+  line-height: 19.2px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.crumbs li {
+  display: flex;
+  align-items: center;
+}
+.crumbs a {
+  color: rgb(0, 102, 204);
+  text-decoration: none;
+}
+.crumbs a:hover {
+  text-decoration: underline;
+}
+.crumbSep {
+  margin: 0 8px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 4px;
+  padding: 8px 8px 0;
+}
+
+/* heading + sub-category chips */
+.heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 24px;
+}
+.title {
+  margin: 8px 0;
+  font: 400 24px/29.64px Helvetica, Arial, sans-serif;
+  color: rgb(0, 102, 204);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.resultsMobile {
+  display: none;
+  margin: 0;
+  font: 400 12.8px/20.48px Helvetica, Arial, sans-serif;
+  color: rgb(32, 35, 41);
+}
+.chip {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  margin: 4px;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #e8e8e8;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+  line-height: 20.02px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.chip:hover {
+  background: #ddd;
+}
+
+/* filter bar */
+.filterBarSticky {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+}
+.filterBarInner {
+  max-width: 1600px;
+  padding: 8px 0;
+}
+.filterBar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  justify-content: space-between;
+  align-items: start;
+  column-gap: 16px;
+}
+.filterList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.sortCell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.results {
+  margin: 0 15px 0 0;
+  font: 300 16px/32px Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+.filter {
+  position: relative;
+}
+.filterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
+  font: 400 14px/16.1px Helvetica, Arial, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.filterButton:hover {
+  background: #f5f5f5;
+}
+.allFilters {
+  background: #f5f5f5;
+}
+.sliders {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+}
+.filterLabel {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+.filterInfo {
+  display: flex;
+  margin-left: 8px;
+  font-size: 20px;
+  color: rgb(59, 109, 216);
+}
+.angle {
+  width: 12.25px;
+  height: 14px;
+}
+.filterMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  min-width: 220px;
+  max-height: 360px;
+  overflow: auto;
+  padding: 8px 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.sortCell .filterMenu {
+  left: auto;
+  right: 0;
+}
+.filterOptions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.filterOption:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.filterOptionOn {
+  font-weight: 700;
+}
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.54);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.filterOptionOn .checkbox {
+  border-color: rgb(0, 102, 204);
+  background: rgb(0, 102, 204) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+.filterCount {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.progress {
+  height: 4px;
+}
+.divider {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+/* product grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 4px 24px;
+  margin: 16px 0;
+}
+.empty {
+  margin: 48px 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* pagination */
+.pager ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 24px 0 40px;
+  padding: 0;
+  list-style: none;
+}
+.pagerItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  margin: 0 3px;
+  padding: 0 6px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.pagerItem:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.pagerCurrent {
+  border-color: rgb(0, 102, 204);
+  background: rgb(0, 102, 204);
+  color: #fff;
+}
+.pagerCurrent:hover {
+  background: rgb(0, 71, 142);
+}
+
+/* "All Filters" drawer */
+.drawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+}
+.drawerBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(360px, 90vw);
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+}
+.drawerHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 18px;
+}
+.drawerClose {
+  border: 0;
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.drawerGroup {
+  border-bottom: 1px solid #e0e0e0;
+}
+.drawerGroup summary {
+  padding: 14px 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* landing pages (Laundry, Cooking, ...) */
+.landing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 16px 0 40px;
+}
+.landingTile {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: #000;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+.landingTile:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.landingTile img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .landing {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .landing {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .landing {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 599px) {
+  .heading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* phone layout measured from the live store at 390px */
+  .title {
+    font-size: 18px;
+    line-height: 22.23px;
+  }
+  .resultsMobile {
+    display: block;
+  }
+  .results {
+    display: none;
+  }
+  .chips {
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .chip {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .filterBarInner {
+    padding: 0 0 8px;
+  }
+  .filterBar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 8px;
+  }
+  .filterList > :not(.allFilters) {
+    display: none;
+  }
+  .filterList > .allFilters,
+  .sortCell,
+  .sortCell > * {
+    width: 100%;
+  }
+  .filterButton {
+    width: 100%;
+    height: 32px;
+  }
+}

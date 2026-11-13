@@ -6,6 +6,7 @@ import { mainNav, site, type NavItem } from "@/data/site";
 import { SearchBar } from "./SearchBar";
 import { MobileMenu } from "./MobileMenu";
 import { LocationIcon, MenuIcon, PhoneIcon } from "./icons";
+import { CartIcon, HeartIcon, PersonIcon } from "../store/icons";
 import styles from "./Header.module.css";
 
 function NavLink({ item, className, onClick }: { item: NavItem; className?: string; onClick?: () => void }) {
@@ -23,33 +24,68 @@ function NavLink({ item, className, onClick }: { item: NavItem; className?: stri
   );
 }
 
-function UtilityNav({ compact = false }: { compact?: boolean }) {
+type UtilityItem = {
+  label: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  /** Link used by the icon-only (tablet/mobile) version, e.g. tel: for the phone. */
+  compactHref?: string;
+  /** Hide on tablet/mobile. */
+  desktopOnly?: boolean;
+};
+
+const UTILITY: Record<"service" | "store", UtilityItem[]> = {
+  service: [
+    { label: "Location", href: "/contacts", icon: LocationIcon },
+    { label: site.phone.display, href: "/contacts", compactHref: site.phone.href, icon: PhoneIcon },
+  ],
+  store: [
+    { label: "Account", href: "/customer/account", icon: PersonIcon, desktopOnly: true },
+    { label: "List", href: "/wishlist", icon: HeartIcon, desktopOnly: true },
+    { label: "Location", href: "/contacts", icon: LocationIcon },
+    { label: site.phone.display, href: site.phone.href, icon: PhoneIcon },
+    { label: "Cart (0)", href: "/checkout/cart", icon: CartIcon },
+  ],
+};
+
+function UtilityNav({ items, compact = false }: { items: UtilityItem[]; compact?: boolean }) {
   return (
     <nav className={styles.utility} aria-label="Store information">
       <ul>
-        <li>
-          <Link href="/contacts" className={styles.utilityLink} aria-label="Location">
-            <span className={styles.utilityIcon}>
-              <LocationIcon />
-            </span>
-            {!compact && <span className={styles.utilityLabel}>Location</span>}
-          </Link>
-        </li>
-        <li>
-          <a href={compact ? site.phone.href : "/contacts"} className={styles.utilityLink} aria-label={`Call ${site.phone.display}`}>
-            <span className={styles.utilityIcon}>
-              <PhoneIcon />
-            </span>
-            {!compact && <span className={styles.utilityLabel}>{site.phone.display}</span>}
-          </a>
-        </li>
+        {items
+          .filter((it) => !(compact && it.desktopOnly))
+          .map((it) => {
+            const href = compact && it.compactHref ? it.compactHref : it.href;
+            const Icon = it.icon;
+            const inner = (
+              <>
+                <span className={styles.utilityIcon}>
+                  <Icon />
+                </span>
+                {!compact && <span className={styles.utilityLabel}>{it.label}</span>}
+              </>
+            );
+            return (
+              <li key={it.label}>
+                {href.startsWith("/") ? (
+                  <Link href={href} className={styles.utilityLink} aria-label={it.label}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <a href={href} className={styles.utilityLink} aria-label={it.label}>
+                    {inner}
+                  </a>
+                )}
+              </li>
+            );
+          })}
       </ul>
     </nav>
   );
 }
 
 /** Desktop navigation row with hover dropdowns. */
-function MainNav() {
+function MainNav({ nav }: { nav: NavItem[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const show = (i: number | null) => {
@@ -66,7 +102,7 @@ function MainNav() {
       <div className={styles.container}>
         <nav aria-label="Main">
           <ul className={styles.nav}>
-            {mainNav.map((item, i) => (
+            {nav.map((item, i) => (
               <li
                 key={item.label}
                 className={[styles.navItem, item.outlined && styles.navItemOutlined, open === i && styles.navItemOpen]
@@ -79,7 +115,28 @@ function MainNav() {
                 <div className={styles.navItemInner}>
                   <NavLink item={item} className={styles.navLink} />
                 </div>
-                {item.children && open === i && (
+                {item.children && open === i && item.children.some((c) => c.children) && (
+                  <div className={styles.mega}>
+                    {item.children.map((group) => (
+                      <ul key={group.href} className={styles.megaGroup}>
+                        <li>
+                          <NavLink item={group} className={styles.megaHeading} onClick={() => setOpen(null)} />
+                        </li>
+                        {group.children && (
+                          <li>
+                            <NavLink item={{ ...group, label: `Shop All ${group.label}` }} className={styles.megaLink} onClick={() => setOpen(null)} />
+                          </li>
+                        )}
+                        {group.children?.map((c) => (
+                          <li key={c.href}>
+                            <NavLink item={c} className={styles.megaLink} onClick={() => setOpen(null)} />
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
+                  </div>
+                )}
+                {item.children && open === i && !item.children.some((c) => c.children) && (
                   <div className={styles.dropdown}>
                     <ul>
                       {item.children.map((child) => (
@@ -100,7 +157,18 @@ function MainNav() {
   );
 }
 
-export function Header() {
+type HeaderProps = {
+  nav?: NavItem[];
+  /** Which utility links to show next to the search box. */
+  utility?: "service" | "store";
+  /** Extra class on the header wrapper so a site can restyle it (the store uses a different utility row). */
+  className?: string;
+  /** Logo to show instead of the service site's; `mobileSrc` is used below 1280px. */
+  logo?: { src: string; mobileSrc?: string; alt: string };
+};
+
+export function Header({ nav = mainNav, utility: variant = "service", className, logo: brand }: HeaderProps = {}) {
+  const utility = UTILITY[variant];
   const [menuOpen, setMenuOpen] = useState(false);
   const [stuck, setStuck] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -116,16 +184,23 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* eslint-disable @next/next/no-img-element -- plain logo images, sized by CSS */
   const logo = (small = false) => (
     <Link href="/" className={small ? styles.logoSmall : styles.logo} aria-label={`${site.name} home`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={site.logo.src} alt={site.logo.alt} width={site.logo.width} height={site.logo.height} />
+      {brand ? (
+        <picture>
+          {brand.mobileSrc && <source media="(max-width: 1279px)" srcSet={brand.mobileSrc} />}
+          <img src={brand.src} alt={brand.alt} />
+        </picture>
+      ) : (
+        <img src={site.logo.src} alt={site.logo.alt} width={site.logo.width} height={site.logo.height} />
+      )}
     </Link>
   );
 
   return (
     <>
-      <div className={styles.headerWrap} ref={headerRef} id="header">
+      <div className={[styles.headerWrap, className].filter(Boolean).join(" ")} ref={headerRef} id="header">
         <header className={styles.header}>
           <div className={styles.topRow}>
             <div className={styles.container}>
@@ -140,10 +215,10 @@ export function Header() {
                   <SearchBar />
                 </div>
                 <div className={styles.utilityCell}>
-                  <UtilityNav />
+                  <UtilityNav items={utility} />
                 </div>
                 <div className={styles.utilityCellCompact}>
-                  <UtilityNav compact />
+                  <UtilityNav items={utility} compact />
                 </div>
               </div>
             </div>
@@ -151,7 +226,7 @@ export function Header() {
           <div className={styles.searchRowMobile}>
             <SearchBar />
           </div>
-          <MainNav />
+          <MainNav nav={nav} />
         </header>
       </div>
 
@@ -166,11 +241,11 @@ export function Header() {
           <div className={styles.miniSearch}>
             <SearchBar />
           </div>
-          <UtilityNav />
+          <UtilityNav items={utility} />
         </div>
       </div>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} nav={nav} />
     </>
   );
 }

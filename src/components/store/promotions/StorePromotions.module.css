@@ -1,0 +1,193 @@
+/* Store promotions grid. Values measured from the live page at 1440px; shared layout comes from Promotions.module.css. */
+.page,
+.container,
+.select select {
+  font-family: Helvetica, Arial, sans-serif;
+}
+.container {
+  max-width: 1280px;
+}
+.filtersTitle {
+  font-family: Helvetica, Arial, sans-serif;
+}
+.select {
+  border-color: rgba(0, 0, 0, 0.23);
+}
+/* An empty multi-select shows its label inside the box, like the live MUI select. */
+.labelInside {
+  top: 16px;
+  left: 9px;
+  background: none;
+  font-size: 16px;
+  line-height: 23px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.08);
+  font: 400 13px/18px Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
+.clear {
+  font-size: 13px;
+  color: rgb(0, 102, 204);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  margin: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+.logo {
+  display: grid;
+  place-items: center;
+  height: 81px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.logo img {
+  max-width: 100%;
+  max-height: 48px;
+}
+.details {
+  display: grid;
+  align-content: space-between;
+  padding: 8px 16px;
+}
+.title {
+  margin: 0;
+  font: 700 20px/24px Helvetica, Arial, sans-serif;
+  color: #000;
+}
+.summary {
+  margin: 0;
+  padding: 8px 0;
+  font: 400 16px/24px Helvetica, Arial, sans-serif;
+}
+.valid {
+  font: 400 12px/19.92px Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+.buttons {
+  display: flex;
+}
+.button {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  background: #000;
+  color: #fff;
+  font: 400 12px/13.8px Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.button:hover {
+  background: #333;
+}
+.loadMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  margin: 24px 4px 0;
+  border: 1px solid rgba(0, 102, 204, 0.5);
+  border-radius: 4px;
+  color: rgb(0, 102, 204);
+  font: 500 14px/24.5px Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.desktopOnly {
+  display: contents;
+}
+.mobileOnly {
+  display: none !important;
+}
+
+/* phone layout measured from the live page at 390px: two small cards per row */
+@media (max-width: 599px) {
+  .desktopOnly,
+  .filtersTitle {
+    display: none;
+  }
+  .mobileOnly {
+    display: inline-flex !important;
+  }
+  .select {
+    width: calc(50% - 8px);
+  }
+  .select:last-child {
+    margin-right: 0;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .logo {
+    height: 57px;
+    padding: 4px 16px;
+  }
+  .logo img {
+    max-height: 40px;
+  }
+  .details {
+    padding: 8px;
+  }
+  .title {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+  .summary {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .valid {
+    font-size: 8px;
+    line-height: 13.28px;
+  }
+  .button {
+    height: 34px;
+    padding: 8px;
+    font-size: 8px;
+    line-height: 9.2px;
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
