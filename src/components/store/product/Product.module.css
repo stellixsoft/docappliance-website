@@ -329,7 +329,13 @@
 }
 /* "Details" popover listing the rebates and instant savings */
 .promoList {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: min(480px, 90vw);
+  height: fit-content;
+  max-height: 80vh;
+  overflow: auto;
   padding: 24px;
   border: 0;
   border-radius: 4px;

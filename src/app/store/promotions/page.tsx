@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { StorePromotions } from "@/components/store/promotions/StorePromotions";
 import { getPromotions } from "@/lib/store/live";
+import { StoreUnavailable } from "@/components/store/StoreUnavailable";
 
 export const metadata: Metadata = {
   title: { absolute: "Promotions | Doctor Appliance | Estill Springs, TN; Knoxville, TN; Phoenix, AZ; Salina, KS" },
@@ -19,7 +20,8 @@ export default async function Page({ searchParams }: Props) {
     if (typeof v === "string" && v) q.set(k, v);
   }
   const pages = Math.max(1, Number(sp.page) || 1);
-  const data = await getPromotions(q.toString(), pages);
+  const data = await getPromotions(q.toString(), pages).catch(() => null);
+  if (!data) return <StoreUnavailable />;
   const more = new URLSearchParams(q);
   more.set("page", String(pages + 1));
   return <StorePromotions data={data} loadMoreHref={`/promotions?${more}`} />;

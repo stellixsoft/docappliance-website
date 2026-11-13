@@ -53,8 +53,9 @@ Node 20+ is required. The store reads live catalog data over the internet (see b
 product and promotion data from the live store pages and caches each page for an hour. When the new backend exists,
 only that file needs to change. Category menus come from snapshots in `src/data/store/*.json`.
 
-**Saved data snapshot:** `data/store-snapshot/` holds a saved copy of ~40 category pages (with sort and page 2
-variants), ~450 products and the promotions pages. If the live store refuses a request (it blocks some IP ranges
+**Saved data snapshot:** `data/store-snapshot/` holds a saved copy of all 516 category pages (page 1, plus sort and
+page 2 variants for the main ones), ~860 products and the default promotions pages. Pages that are in neither the
+live store nor the snapshot show a short "not available in the demo" notice instead of an error. If the live store refuses a request (it blocks some IP ranges
 and rate-limits bursts), the page uses the saved copy instead. Run with `STORE_DATA=snapshot` to use the saved copy
 first (fast, works offline for those pages). To refresh it, run the server with `STORE_SNAPSHOT_WRITE=1` and browse
 or crawl the pages; every successful live result is saved.

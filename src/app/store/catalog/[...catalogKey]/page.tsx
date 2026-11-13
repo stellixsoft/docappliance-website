@@ -10,6 +10,7 @@ import { FilterBar } from "@/components/store/catalog/FilterBar";
 import { Pagination } from "@/components/store/catalog/Pagination";
 import { ProductTile } from "@/components/store/catalog/ProductTile";
 import styles from "@/components/store/catalog/Catalog.module.css";
+import { StoreUnavailable } from "@/components/store/StoreUnavailable";
 
 type Props = { params: Promise<{ catalogKey: string[] }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
@@ -20,18 +21,20 @@ function liveQuery(sp: Record<string, string | string[] | undefined>) {
   return q.toString();
 }
 
-async function load(props: Props): Promise<{ data: CatalogPage; keys: string[]; sp: Record<string, string | string[] | undefined> }> {
+async function load(props: Props): Promise<{ data: CatalogPage; keys: string[]; sp: Record<string, string | string[] | undefined> } | null> {
   const [{ catalogKey }, sp] = await Promise.all([props.params, props.searchParams]);
   try {
     return { data: await getCatalog(catalogKey, liveQuery(sp)), keys: catalogKey, sp };
   } catch (e) {
     if (e instanceof StoreNotFound) notFound();
-    throw e;
+    return null; // live store refused and the page is not in the saved snapshot
   }
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { data, keys } = await load(props);
+  const loaded = await load(props);
+  if (!loaded) return { title: { absolute: `Shop${store.titleSuffix}` } };
+  const { data, keys } = loaded;
   return {
     title: { absolute: `${data.title}${store.titleSuffix}` },
     description: data.description ?? undefined,
@@ -40,7 +43,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function CatalogRoute(props: Props) {
-  const { data, keys, sp } = await load(props);
+  const loaded = await load(props);
+  if (!loaded) return <StoreUnavailable />;
+  const { data, keys, sp } = loaded;
   const cat = categoryByKey(keys[keys.length - 1]) ?? categoryById(data.id);
 
   const crumbs: Crumb[] = [{ label: "Our Catalog" }];

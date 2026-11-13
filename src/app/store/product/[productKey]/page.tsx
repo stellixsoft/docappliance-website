@@ -5,6 +5,7 @@ import { ancestors, categoryById, categoryHref, ROOT_KEY } from "@/lib/store/cat
 import { store } from "@/data/store";
 import type { Crumb } from "@/components/store/catalog/Breadcrumbs";
 import { ProductDetail } from "@/components/store/product/ProductDetail";
+import { StoreUnavailable } from "@/components/store/StoreUnavailable";
 
 type Props = { params: Promise<{ productKey: string }> };
 
@@ -14,12 +15,13 @@ async function load(props: Props) {
     return await getProduct(decodeURIComponent(productKey));
   } catch (e) {
     if (e instanceof StoreNotFound) notFound();
-    throw e;
+    return null; // live store refused and the product is not in the saved snapshot
   }
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const p = await load(props);
+  if (!p) return { title: { absolute: `Product${store.titleSuffix}` } };
   return {
     title: { absolute: `${p.metaTitle ?? p.name}${store.titleSuffix}` },
     description: p.metaDescription ?? p.shortDescription ?? undefined,
@@ -30,6 +32,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function ProductRoute(props: Props) {
   const p = await load(props);
+  if (!p) return <StoreUnavailable />;
   // Breadcrumb: deepest category the product belongs to, without the catalog root.
   const deepest = p.categoryIds
     .map((id) => categoryById(id))
