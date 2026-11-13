@@ -1,5 +1,8 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import nodePath from "node:path";
 
 /**
  * Demo data source for the store.
@@ -17,6 +20,46 @@ type Json = Record<string, unknown>;
 type NextData = { props: { pageProps: { initialState: Json } } };
 
 export class StoreNotFound extends Error {}
+
+/**
+ * Saved copy of the demo data (data/store-snapshot), so the demo still works when the live store is slow or
+ * refuses requests (it rate-limits by IP). STORE_DATA=snapshot uses the saved copy first; otherwise it is the
+ * fallback when a live request fails. STORE_SNAPSHOT_WRITE=1 saves every successful live result.
+ */
+const SNAPSHOT_DIR = nodePath.join(process.cwd(), "data", "store-snapshot");
+
+function snapshotFile(kind: string, key: string) {
+  return nodePath.join(SNAPSHOT_DIR, kind, createHash("sha1").update(key).digest("hex").slice(0, 16) + ".json");
+}
+
+async function readSnapshot<T>(kind: string, key: string): Promise<T | null> {
+  try {
+    return JSON.parse(await readFile(snapshotFile(kind, key), "utf8")) as T;
+  } catch {
+    return null;
+  }
+}
+
+async function withSnapshot<T>(kind: string, key: string, load: () => Promise<T>): Promise<T> {
+  if (process.env.STORE_DATA === "snapshot") {
+    const saved = await readSnapshot<T>(kind, key);
+    if (saved) return saved;
+  }
+  try {
+    const value = await load();
+    if (process.env.STORE_SNAPSHOT_WRITE === "1") {
+      const file = snapshotFile(kind, key);
+      await mkdir(nodePath.dirname(file), { recursive: true });
+      await writeFile(file, JSON.stringify(value));
+    }
+    return value;
+  } catch (err) {
+    if (err instanceof StoreNotFound) throw err;
+    const saved = await readSnapshot<T>(kind, key);
+    if (saved) return saved;
+    throw err;
+  }
+}
 
 async function fetchNextData(pathWithQuery: string): Promise<{ status: number; state: Json }> {
   const res = await fetch(ORIGIN + pathWithQuery, {
@@ -202,8 +245,8 @@ async function loadCatalog(pathWithQuery: string): Promise<CatalogPage> {
   return {
     id: String(info.entity_id),
     key,
-    name: String(info.name || info.page_h1_title || ""),
-    title: String(info.meta_title || info.name || info.page_h1_title || ""),
+    name: String(info.name || info.page_h1_title || key),
+    title: String(info.meta_title || info.name || info.page_h1_title || key),
     description: str(info.meta_description),
     displayMode: String(info.display_mode ?? "PRODUCTS"),
     products: ids.filter((id) => byId[id]).map((id) => tile(byId[id])),
@@ -231,16 +274,25 @@ function badgeLabel(v: string | null): string | null {
   return tag ? tag.replace(/ Models$/i, " Model") : null;
 }
 
+/** Route params can arrive still percent-encoded ("speed%20queen"); decode once so they are not encoded twice. */
+function safeDecode(s: string) {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+}
+
 /** One category listing page, including the query string (page, sort, filters) the live site understands. */
 export function getCatalog(segments: string[], query: string): Promise<CatalogPage> {
-  const path = "/catalog/" + segments.map(encodeURIComponent).join("/") + (query ? `?${query}` : "");
-  return unstable_cache(() => loadCatalog(path), ["store-catalog", path], { revalidate: REVALIDATE })();
+  const path = "/catalog/" + segments.map((s) => encodeURIComponent(safeDecode(s))).join("/") + (query ? `?${query}` : "");
+  return unstable_cache(() => withSnapshot("catalog", path, () => loadCatalog(path)), ["store-catalog", path], { revalidate: REVALIDATE })();
 }
 
 // ---------------------------------------------------------------- product
 
 async function loadProduct(key: string): Promise<ProductDetail> {
-  const { state } = await fetchNextData("/product/" + encodeURIComponent(key));
+  const { state } = await fetchNextData("/product/" + encodeURIComponent(safeDecode(key)));
   const ps = state.productSlice as Json;
   const byId = (ps.byId ?? {}) as Record<string, Json>;
   const p = Object.values(byId).find((x) => x.url_key === key || x.canonical_url_key === key) as Json | undefined;
@@ -288,7 +340,7 @@ async function loadProduct(key: string): Promise<ProductDetail> {
 }
 
 export function getProduct(key: string): Promise<ProductDetail> {
-  return unstable_cache(() => loadProduct(key), ["store-product", key], { revalidate: REVALIDATE })();
+  return unstable_cache(() => withSnapshot("product", key, () => loadProduct(key)), ["store-product", key], { revalidate: REVALIDATE })();
 }
 
 // ---------------------------------------------------------------- promotions
@@ -370,5 +422,5 @@ async function loadPromotions(query: string, pages: number): Promise<PromotionsP
 }
 
 export function getPromotions(query: string, pages = 1): Promise<PromotionsPage> {
-  return unstable_cache(() => loadPromotions(query, pages), ["store-promotions", query, String(pages)], { revalidate: REVALIDATE })();
+  return unstable_cache(() => withSnapshot("promotions", `${query}|${pages}`, () => loadPromotions(query, pages)), ["store-promotions", query, String(pages)], { revalidate: REVALIDATE })();
 }
